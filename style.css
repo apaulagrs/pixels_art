@@ -8,12 +8,14 @@
 }
 
 #color-palette {
-  text-align: center;
-  margin: 50px 0px 0px;
+  display: table;
+  border-spacing: 0;
+  background-color: black;
+  margin: 30px auto;
 }
 
 .color {
-  margin: auto; 
+  margin: auto;
   display: inline-block;
   border: 1px solid rgb(0, 0, 0);
 }
@@ -24,18 +26,34 @@
 
 #black {
   background-color: rgb(0, 0, 0);
+  display: table-cell;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 #color2 {
   background-color: rgb(255, 0, 0);
+  display: table-cell;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 #color3 {
   background-color: rgb(255, 165, 0);
+  display: table-cell;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 #color4 {
   background-color: rgb(0, 0, 139);
+  display: table-cell;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 #clear-board {
@@ -47,7 +65,7 @@
 
 #pixel-board {
   display: table;
-  border-spacing: 0px;
+  border-spacing: 0;
   background-color: black;
   margin: 30px auto;
 }
