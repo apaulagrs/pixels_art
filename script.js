@@ -1,19 +1,5 @@
-function clickPalette() {
-  const buttonColorBlack = document.getElementById('black');
-  buttonColorBlack.addEventListener('click', );
-
-  const buttonColor2 = document.getElementById('color2');
-  buttonColor2.addEventListener('click', );
-
-  const buttonColor3 = document.getElementById('color3');
-  buttonColor3.addEventListener('click', );
-
-  const buttonColor4 = document.getElementById('color4');
-  buttonColor4.addEventListener('click', );
-}
-
 function generateColor() {
-  function rgb(color2, color3, color4) {
+  function rgb(_color2, _color3, _color4) {
   }
   const a = parseInt((Math.random() * 255), 0);
   const b = parseInt((Math.random() * 255), 0);
@@ -50,8 +36,38 @@ function assignNewColors() {
   colors4.style.backgroundColor = JSON.parse(cC);
 }
 
-function colorSelection() {
-  clickPalette
+function removeSelected() {
+  const divClass = document.getElementsByClassName('color');
+  for (let index = 0; index < divClass.length; index += 1) {
+    if (divClass[index].classList.contains('selected')) {
+      divClass[index].classList.remove('selected');
+    }
+  }
+}
+
+const selected = 'color selected';
+function colorSelectedBlack() {
+  removeSelected();
+  const selblack = document.getElementById('black');
+  selblack.className = selected;
+}
+
+function colorSelected2() {
+  removeSelected();
+  const sel2 = document.getElementById('color2');
+  sel2.className = selected;
+}
+
+function colorSelected3() {
+  removeSelected();
+  const sel3 = document.getElementById('color3');
+  sel3.className = selected;
+}
+
+function colorSelected4() {
+  removeSelected();
+  const sel4 = document.getElementById('color4');
+  sel4.className = selected;
 }
 
 function allWhite() {
@@ -72,5 +88,20 @@ function clearButton() {
   clearPx.addEventListener('click', allWhite);
 }
 
+function clickPalette() {
+  const buttonColorBlack = document.getElementById('black');
+  buttonColorBlack.addEventListener('click', colorSelectedBlack);
+
+  const buttonColor2 = document.getElementById('color2');
+  buttonColor2.addEventListener('click', colorSelected2);
+
+  const buttonColor3 = document.getElementById('color3');
+  buttonColor3.addEventListener('click', colorSelected3);
+
+  const buttonColor4 = document.getElementById('color4');
+  buttonColor4.addEventListener('click', colorSelected4);
+}
+
 clickButton();
 clearButton();
+clickPalette();
