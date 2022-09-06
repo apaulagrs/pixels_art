@@ -86,8 +86,26 @@ function allWhite() {
 function clickButton() {
   const button = document.getElementById('button-random-color');
   button.addEventListener('click', function () {
-    const newRandom = assignNewColors();
-    localStorage.setItem('colorPalette', JSON.stringify(newRandom));
+    if (localStorage.length === 0) {
+      saveColor();
+    } else {
+      const newRandom = assignNewColors();
+      const s1 = JSON.parse(newRandom[0]);
+      const s2 = JSON.parse(newRandom[1]);
+      const s3 = JSON.parse(newRandom[2]);
+      const s4 = JSON.parse(newRandom[3]);
+      const allNew = [s1, s2, s3, s4];
+      localStorage.setItem('colorPalette', JSON.stringify(allNew));
+      const localData = JSON.parse(localStorage.getItem('colorPalette'));
+      const random1 = document.getElementsByClassName('color')[0];
+      random1.style.backgroundColor = localData[0];
+      const random2 = document.getElementsByClassName('color')[1];
+      random2.style.backgroundColor = localData[1];
+      const random3 = document.getElementsByClassName('color')[2];
+      random3.style.backgroundColor = localData[2];
+      const random4 = document.getElementsByClassName('color')[3];
+      random4.style.backgroundColor = localData[3];
+    }
   });
 }
 
@@ -112,17 +130,23 @@ function clickPalette() {
 
 // Função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página;
 
-function loadColor() {
-  const localColor = JSON.parse(localStorage.getItem('colorPalette'));
-  const saveBlack = document.getElementsByClassName('color')[0];
-  saveBlack.style.backgroundColor = JSON.parse(localColor[0]);
-  const saveColor2 = document.getElementsByClassName('color')[1];
-  saveColor2.style.backgroundColor = JSON.parse(localColor[1]);
-  const saveColor3 = document.getElementsByClassName('color')[2];
-  saveColor3.style.backgroundColor = JSON.parse(localColor[2]);
-  const saveColor4 = document.getElementsByClassName('color')[3];
-  saveColor4.style.backgroundColor = JSON.parse(localColor[3]);
-  return localColor;
+function saveColor() {
+  const p1 = 'rgb(0, 0, 0)';
+  const p2 = 'rgb(255, 0, 0))';
+  const p3 = 'rgb(255, 165, 0)';
+  const p4 = 'rgb(0, 0, 139)';
+  const colorsId = [p1, p2, p3, p4];
+  localStorage.setItem('colorPalette', JSON.stringify(colorsId));
+  const localFirst = JSON.parse(localStorage.getItem('colorPalette'));
+  const saveB = document.getElementsByClassName('color')[0];
+  saveB.style.backgroundColor = localFirst[0];
+  const save2 = document.getElementsByClassName('color')[1];
+  save2.style.backgroundColor = localFirst[1];
+  const save3 = document.getElementsByClassName('color')[2];
+  save3.style.backgroundColor = localFirst[2];
+  const save4 = document.getElementsByClassName('color')[3];
+  save4.style.backgroundColor = localFirst[3];
+  return localFirst;
 }
 
 // Função que permite preencher um pixel do quadro com a cor selecionada na paleta de cores;
@@ -134,4 +158,3 @@ function loadColor() {
 clickButton();
 clearButton();
 clickPalette();
-loadColor();
