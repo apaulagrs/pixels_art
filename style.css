@@ -21,7 +21,7 @@
 }
 
 .selected {
-
+  background-color: 0;
 }
 
 #black {
@@ -29,8 +29,6 @@
   display: table-cell;
   width: 40px;
   height: 40px;
-  border: 1px solid rgb(0, 0, 0);
-  text-decoration: none;
 }
 
 #color2 {
@@ -38,8 +36,6 @@
   display: table-cell;
   width: 40px;
   height: 40px;
-  border: 1px solid rgb(0, 0, 0);
-  text-decoration: none;
 }
 
 #color3 {
@@ -47,8 +43,6 @@
   display: table-cell;
   width: 40px;
   height: 40px;
-  border: 1px solid rgb(0, 0, 0);
-  text-decoration: none;
 }
 
 #color4 {
@@ -56,8 +50,6 @@
   display: table-cell;
   width: 40px;
   height: 40px;
-  border: 1px solid rgb(0, 0, 0);
-  text-decoration: none;
 }
 
 #clear-board {
@@ -71,7 +63,6 @@
 #pixel-board {
   display: table;
   border-spacing: 0;
-  background-color: black;
   margin: 30px auto;
 }
 
