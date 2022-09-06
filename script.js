@@ -154,3 +154,16 @@ function pixelPaint() {
     });
   }
 }pixelPaint();
+// botão que retorne a cor do quadro para a cor inicial;
+function allWhite() {
+  const whitePx = document.getElementsByClassName('pixel');
+  for (let index = 0; index < whitePx.length; index += 1) {
+    whitePx[index].style.backgroundColor = 'rgb(255, 255, 255)';
+  }
+  return whitePx;
+}
+
+function clearButton() {
+  const clearPx = document.getElementById('clear-board');
+  clearPx.addEventListener('click', allWhite);
+}clearButton();
