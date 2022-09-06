@@ -145,4 +145,12 @@ function clickPalette() {
 }clickPalette();
 
 // função para selecionar uma cor na paleta de cores e preencha os pixels no quadro;
-
+function pixelPaint() {
+  const pixelColor = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixelColor.length; index += 1) {
+    pixelColor[index].addEventListener('click', function () {
+      const clickColor = document.querySelector('.color.selected').style.backgroundColor;
+      pixelColor[index].style.backgroundColor = clickColor;
+    });
+  }
+}pixelPaint();
