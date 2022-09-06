@@ -1,4 +1,37 @@
-/* It's generating a random color. */
+const color0 = document.querySelectorAll('.color')[0];
+const color1 = document.querySelectorAll('.color')[1];
+const color2 = document.querySelectorAll('.color')[2];
+const color3 = document.querySelectorAll('.color')[3];
+const bgColor = 'background-color';
+const gtBgC0 = window.getComputedStyle(color0, null);
+const gtBgC1 = window.getComputedStyle(color1, null);
+const gtBgC2 = window.getComputedStyle(color2, null);
+const gtBgC3 = window.getComputedStyle(color3, null);
+const c0 = gtBgC0.getPropertyValue(bgColor);
+const c1 = gtBgC1.getPropertyValue(bgColor);
+const c2 = gtBgC2.getPropertyValue(bgColor);
+const c3 = gtBgC3.getPropertyValue(bgColor);
+
+// Função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página;
+function saveLocal() {
+  const localColors = [c0, c1, c2, c3];
+  localStorage.setItem('colorPalette', JSON.stringify(localColors));
+}
+
+function getLocalColors() {
+  const getColors = JSON.parse(localStorage.getItem('colorPalette'));
+  if (localStorage.getItem('colorPalette') === null) {
+    saveLocal();
+  } else {
+    color0.style.backgroundColor = getColors[0];
+    color1.style.backgroundColor = getColors[1];
+    color2.style.backgroundColor = getColors[2];
+    color3.style.backgroundColor = getColors[3];
+  }
+
+}getLocalColors();
+
+// botão para gerar cores aleatórias para a paleta de cores;
 function generateColor() {
   function rgb(_color2, _color3, _color4) {
   }
@@ -13,15 +46,13 @@ function generateColor() {
   return newColor;
 }
 
-/* It's generating a random color. */
 function newPaletteColors() {
   const numCol = generateColor();
   const strCol = 'rgb(' + numCol[0] + ', ' + numCol[1] + ', ' + numCol[2] + ')';
   return strCol;
 }
-/* It's saving the color palette generated randomly. */
 function assignNewColors() {
-  let cBl = JSON.stringify('rgb(0, 0, 0)');
+  const cBl = JSON.stringify('rgb(0, 0, 0)');
   const colorsBlack = document.getElementById('black');
   let cA = JSON.stringify(newPaletteColors());
   const colors2 = document.getElementById('color2');
@@ -40,6 +71,30 @@ function assignNewColors() {
   colors4.style.backgroundColor = JSON.parse(cC);
   return [cBl, cA, cB, cC];
 }
+
+function clickButton() {
+  const button = document.getElementById('button-random-color');
+  button.addEventListener('click', function () {
+    const newRandom = assignNewColors();
+    const s1 = JSON.parse(newRandom[0]);
+    const s2 = JSON.parse(newRandom[1]);
+    const s3 = JSON.parse(newRandom[2]);
+    const s4 = JSON.parse(newRandom[3]);
+    const allNew = [s1, s2, s3, s4];
+    localStorage.setItem('colorPalette', JSON.stringify(allNew));
+    const localData = JSON.parse(localStorage.getItem('colorPalette'));
+    const random1 = document.getElementsByClassName('color')[0];
+    random1.style.backgroundColor = localData[0];
+    const random2 = document.getElementsByClassName('color')[1];
+    random2.style.backgroundColor = localData[1];
+    const random3 = document.getElementsByClassName('color')[2];
+    random3.style.backgroundColor = localData[2];
+    const random4 = document.getElementsByClassName('color')[3];
+    random4.style.backgroundColor = localData[3];
+  });
+}clickButton();
+
+// cor preta como cor inicial da paleta de cores;
 
 function removeSelected() {
   const divClass = document.getElementsByClassName('color');
@@ -75,45 +130,6 @@ function colorSelected4() {
   sel4.className = selected;
 }
 
-function allWhite() {
-  const whitePx = document.getElementsByClassName('pixel');
-  for (let index = 0; index < whitePx.length; index += 1) {
-    whitePx[index].style.backgroundColor = 'rgb(255, 255, 255)';
-  }
-  return whitePx;
-}
-
-function clickButton() {
-  const button = document.getElementById('button-random-color');
-  button.addEventListener('click', function () {
-    if (localStorage.length === 0) {
-      saveColor();
-    } else {
-      const newRandom = assignNewColors();
-      const s1 = JSON.parse(newRandom[0]);
-      const s2 = JSON.parse(newRandom[1]);
-      const s3 = JSON.parse(newRandom[2]);
-      const s4 = JSON.parse(newRandom[3]);
-      const allNew = [s1, s2, s3, s4];
-      localStorage.setItem('colorPalette', JSON.stringify(allNew));
-      const localData = JSON.parse(localStorage.getItem('colorPalette'));
-      const random1 = document.getElementsByClassName('color')[0];
-      random1.style.backgroundColor = localData[0];
-      const random2 = document.getElementsByClassName('color')[1];
-      random2.style.backgroundColor = localData[1];
-      const random3 = document.getElementsByClassName('color')[2];
-      random3.style.backgroundColor = localData[2];
-      const random4 = document.getElementsByClassName('color')[3];
-      random4.style.backgroundColor = localData[3];
-    }
-  });
-}
-
-function clearButton() {
-  const clearPx = document.getElementById('clear-board');
-  clearPx.addEventListener('click', allWhite);
-}
-
 function clickPalette() {
   const buttonColorBlack = document.getElementById('black');
   buttonColorBlack.addEventListener('click', colorSelectedBlack);
@@ -126,35 +142,7 @@ function clickPalette() {
 
   const buttonColor4 = document.getElementById('color4');
   buttonColor4.addEventListener('click', colorSelected4);
-}
+}clickPalette();
 
-// Função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página;
+// função para selecionar uma cor na paleta de cores e preencha os pixels no quadro;
 
-function saveColor() {
-  const p1 = 'rgb(0, 0, 0)';
-  const p2 = 'rgb(255, 0, 0))';
-  const p3 = 'rgb(255, 165, 0)';
-  const p4 = 'rgb(0, 0, 139)';
-  const colorsId = [p1, p2, p3, p4];
-  localStorage.setItem('colorPalette', JSON.stringify(colorsId));
-  const localFirst = JSON.parse(localStorage.getItem('colorPalette'));
-  const saveB = document.getElementsByClassName('color')[0];
-  saveB.style.backgroundColor = localFirst[0];
-  const save2 = document.getElementsByClassName('color')[1];
-  save2.style.backgroundColor = localFirst[1];
-  const save3 = document.getElementsByClassName('color')[2];
-  save3.style.backgroundColor = localFirst[2];
-  const save4 = document.getElementsByClassName('color')[3];
-  save4.style.backgroundColor = localFirst[3];
-  return localFirst;
-}
-
-// Função que permite preencher um pixel do quadro com a cor selecionada na paleta de cores;
-
-// Crie um botão que, ao ser clicado, limpa o quadro preenchendo a cor de todos seus pixels com branco;
-
-// Crie uma função para salvar e recuperar o seu desenho atual no localStorage;
-
-clickButton();
-clearButton();
-clickPalette();
