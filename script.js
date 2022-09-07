@@ -167,3 +167,26 @@ function clearButton() {
   const clearPx = document.getElementById('clear-board');
   clearPx.addEventListener('click', allWhite);
 }clearButton();
+
+// função para salvar e recuperar o seu desenho atual no localStorage;
+function getPaint() {
+  const pixelsArt = document.querySelectorAll('.pixel');
+  let saveArt = [];
+  for (let i = 0; i < pixelsArt.length; i += 1) {
+    saveArt.push(pixelsArt[i].style.backgroundColor);
+  }
+  localStorage.setItem('pixelBoard', JSON.stringify(saveArt));
+}getPaint();
+
+function localPainted() {
+  if (localStorage.getItem('pixelBoard') === null) {
+    getPaint();
+  }
+  const getArts = JSON.parse(localStorage.getItem('pixelBoard'));
+  for (let pix = 0; pix < getArts.length; pix += 1) {
+    const colPix = document.querySelectorAll('.pixel');
+    for (let ind2 = 0; ind2 < colPix.length; ind2 += 1) {
+      colPix[ind2].style.backgroundColor = getArts[pix];
+    }
+  }
+}localPainted();
